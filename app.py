@@ -16,6 +16,7 @@ from fastapi.responses import JSONResponse
 import uvicorn
 import traceback
 from dotenv import load_dotenv
+import subprocess
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -105,6 +106,7 @@ if not os.path.exists(DB_PATH):
         embedding BLOB
     )
     ''')
+    subprocess.run(["python", "insert_discourse_chunks.py"])
     conn.commit()
     conn.close()
 
